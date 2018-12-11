@@ -141,7 +141,7 @@ function processUserEvents(data) {
     entry.changes.forEach(function(change){
       console.log('User Change AER 1112-1',group_id,change);
 	    
-      console.log('AER','This is my change = ' + JSON.stringify(change[0].value));	    
+      console.log('AER','This is my change = ' + JSON.stringify(change.value[0]));	    
     });
   });
 }
