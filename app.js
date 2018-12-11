@@ -140,6 +140,7 @@ function processUserEvents(data) {
     let group_id = entry.id;
     entry.changes.forEach(function(change){
       console.log('User Change AER 1112-1',group_id,change);
+      console.log('AER','This is my change = ' + change);	    
     });
   });
 }
