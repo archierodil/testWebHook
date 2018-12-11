@@ -141,11 +141,25 @@ function processUserEvents(data) {
     entry.changes.forEach(function(change){
       console.log('User Change AER 1112-1',group_id,change);
 	    
-      console.log('AER','This is my change = ' + JSON.stringify(change);	
-	    
-	    
-	    
-	    
+      console.log('AER','This is my change = ' + JSON.stringify(change));	
+	   const https = require('https');
+
+https.get(https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEvent=hoyshrek!!!', (resp) => {
+  let data = '';
+
+  // A chunk of data has been recieved.
+  resp.on('data', (chunk) => {
+    data += chunk;
+  });
+
+  // The whole response has been received. Print out the result.
+  resp.on('end', () => {
+    console.log(JSON.parse(data).explanation);
+  });
+
+}).on("error", (err) => {
+  console.log("Error: " + err.message);
+});
     });
   });
 }
