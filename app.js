@@ -142,7 +142,32 @@ function processUserEvents(data) {
       console.log('User Change AER 1112-1',group_id,change);
 	    
       console.log('AER','This is my change = ' + change.value);	
-	   //change.value[]
+	
+	    const https = require('https');
+
+https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEvent=' + change.value, (resp) => {
+  let datashrek = '';
+
+  // A chunk of data has been recieved.
+  resp.on('datashrek', (chunk) => {
+    datashrek += chunk;
+  });
+
+  // The whole response has been received. Print out the result.
+  resp.on('end', () => {
+    console.log(JSON.parse(datashrek).explanation);
+  });
+
+}).on("error", (err) => {
+  console.log("Error: " + err.message);
+});
+	    
+	    
+	    
+	    
+	    
+	    
+	    
     });
   });
 }
