@@ -139,7 +139,7 @@ function processUserEvents(data) {
   data.entry.forEach(function(entry){
     let group_id = entry.id;
     entry.changes.forEach(function(change){
-      console.log('User Change AER',group_id,change);
+      console.log('User Change AER 1112-1',group_id,change);
     });
   });
 }
