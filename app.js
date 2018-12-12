@@ -139,7 +139,7 @@ function processUserEvents(data) {
   data.entry.forEach(function(entry){
     let group_id = entry.id;
     entry.changes.forEach(function(change){
-	    console.log('User Change AER 1212-1',JSON.stringify(data)); 
+	   
 	console.log('User Change AER 1212-2',JSON.stringify(entry));    
 	      
       console.log('User Change AER 1112-1',group_id,change);
@@ -147,8 +147,11 @@ function processUserEvents(data) {
       console.log('AER','This is my change = ' + JSON.stringify(change));	
 	
 	    const https = require('https');
-          
-https.get('https://graph.facebook.com/100030273221759?fields=name&access_token=DQVJ2WGg4NGlrLXFVR2pWdkp1MWhPYUxoNllaZAXVtSEJqZAFg1ZAURDd1hQNFNneVRTTjA4Ry1EbXI2VXA4OVQ5aUlXbGFYOU9HOXR1djlKUG5FR2pyRzlQc1VwNDU5S1J6Yjdzb1lSU0o1ZA25NOFJUVm1leGVMR0lQVWFJT0tFako3d0ZAHY1hQR2ZAmUkFOTkExbHZAGd210bjNsdW84NjZAVeXBmUW9wbmlxaUx0YVBSMXlua25YaW9RTW52bmVrMlU0eWRhZAGdnc3lieWVyQUVFMQZDZD', (resp) => {
+console.log('field = ' + change.field);
+console.log('event id = ' + change.value.event_id);
+console.log('verb = ' + change.value.verb);	    
+     /*
+https.get('https://graph.facebook.com/' + group_id + '100030273221759?fields=name&access_token=DQVJ2WGg4NGlrLXFVR2pWdkp1MWhPYUxoNllaZAXVtSEJqZAFg1ZAURDd1hQNFNneVRTTjA4Ry1EbXI2VXA4OVQ5aUlXbGFYOU9HOXR1djlKUG5FR2pyRzlQc1VwNDU5S1J6Yjdzb1lSU0o1ZA25NOFJUVm1leGVMR0lQVWFJT0tFako3d0ZAHY1hQR2ZAmUkFOTkExbHZAGd210bjNsdW84NjZAVeXBmUW9wbmlxaUx0YVBSMXlua25YaW9RTW52bmVrMlU0eWRhZAGdnc3lieWVyQUVFMQZDZD', (resp) => {
   let datafiona = '';
   resp.on('data',(chunk) => {
 	  datafiona += chunk;  
@@ -185,7 +188,7 @@ https.get('https://graph.facebook.com/100030273221759?fields=name&access_token=D
   console.log("Error: " + err.message);
 });
 	    
-	    
+	*/    
 	    
 	    
 	   
