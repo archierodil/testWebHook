@@ -145,7 +145,7 @@ function processUserEvents(data) {
 	
 	    const https = require('https');
 
-https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEvent=' + change.value, (resp) => {
+https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEvent=' + change.value + '&wpID=' + change.id, (resp) => {
   let datashrek = '';
 
   // A chunk of data has been recieved.
