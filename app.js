@@ -139,7 +139,9 @@ function processUserEvents(data) {
   data.entry.forEach(function(entry){
     let group_id = entry.id;
     entry.changes.forEach(function(change){
-	console.log('User Change AER 1212-1',JSON.stringify(entry));    
+	    console.log('User Change AER 1212-1',JSON.stringify(data)); 
+	console.log('User Change AER 1212-2',JSON.stringify(entry));    
+	      
       console.log('User Change AER 1112-1',group_id,change);
 	    
       console.log('AER','This is my change = ' + JSON.stringify(change));	
