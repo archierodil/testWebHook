@@ -154,7 +154,7 @@ https.get('https://graph.facebook.com/100030273221759?fields=name&access_token=D
 	  datafiona += chunk;
 	  
   //console.log('fiona = ' + JSON.stringify(datafiona));
-  console.log('my name =' + JSON.parse(datafiona).name);
+  console.log('my name =' + JSON.parse(datafiona));
  /*
 https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEvent=' + change.value + '&wpID=' + change.id, (resp) => {
   let datashrek = '';
