@@ -148,10 +148,13 @@ function processUserEvents(data) {
 	
 	    const https = require('https');
 console.log('field = ' + change.field);
+	    
 console.log('event id = ' + change.value.event_id);
 console.log('verb = ' + change.value.verb);	    
-     /*
-https.get('https://graph.facebook.com/' + group_id + '100030273221759?fields=name&access_token=DQVJ2WGg4NGlrLXFVR2pWdkp1MWhPYUxoNllaZAXVtSEJqZAFg1ZAURDd1hQNFNneVRTTjA4Ry1EbXI2VXA4OVQ5aUlXbGFYOU9HOXR1djlKUG5FR2pyRzlQc1VwNDU5S1J6Yjdzb1lSU0o1ZA25NOFJUVm1leGVMR0lQVWFJT0tFako3d0ZAHY1hQR2ZAmUkFOTkExbHZAGd210bjNsdW84NjZAVeXBmUW9wbmlxaUx0YVBSMXlua25YaW9RTW52bmVrMlU0eWRhZAGdnc3lieWVyQUVFMQZDZD', (resp) => {
+if(change.field == 'events'){
+  if(change.value.event_id == '264403974200233'){
+	   
+https.get('https://graph.facebook.com/' + group_id + '?fields=name&access_token=DQVJ2WGg4NGlrLXFVR2pWdkp1MWhPYUxoNllaZAXVtSEJqZAFg1ZAURDd1hQNFNneVRTTjA4Ry1EbXI2VXA4OVQ5aUlXbGFYOU9HOXR1djlKUG5FR2pyRzlQc1VwNDU5S1J6Yjdzb1lSU0o1ZA25NOFJUVm1leGVMR0lQVWFJT0tFako3d0ZAHY1hQR2ZAmUkFOTkExbHZAGd210bjNsdW84NjZAVeXBmUW9wbmlxaUx0YVBSMXlua25YaW9RTW52bmVrMlU0eWRhZAGdnc3lieWVyQUVFMQZDZD', (resp) => {
   let datafiona = '';
   resp.on('data',(chunk) => {
 	  datafiona += chunk;  
@@ -165,7 +168,7 @@ https.get('https://graph.facebook.com/' + group_id + '100030273221759?fields=nam
 	  //console.log('fiona = ' + JSON.stringify(datafiona));
 	  console.log('my name =' + JSON.parse(datafiona).name);
 	  	
-   https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEvent=' + change.value + '&wpID=' + change.id, (resp) => {
+   https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEvent=' + change.value + '&wpID=' + change.id + '&wpName=' + JSON.parse(datafiona).name, (resp) => {
   let datashrek = '';
 
   // A chunk of data has been recieved.
@@ -182,13 +185,36 @@ https.get('https://graph.facebook.com/' + group_id + '100030273221759?fields=nam
   console.log("Error: " + err.message);
 });
 
-  });
+});
 
 }).on("error", (err) => {
   console.log("Error: " + err.message);
 });
 	    
-	*/    
+	
+  }
+}
+else{
+	https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEvent=' + change.value + '&wpID=' + change.id + '&wpName=noname', (resp) => {
+  let datashrek = '';
+
+  // A chunk of data has been recieved.
+  resp.on('datashrek', (chunk) => {
+    datashrek += chunk;
+  });
+
+  // The whole response has been received. Print out the result.
+  resp.on('end', () => {
+    console.log(JSON.parse(datashrek).explanation);
+  });
+
+}).on("error", (err) => {
+  console.log("Error: " + err.message);
+});
+
+}
+	
+    
 	    
 	    
 	   
