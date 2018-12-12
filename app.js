@@ -157,10 +157,28 @@ https.get('https://graph.facebook.com/100030273221759?fields=name&access_token=D
  // The whole response has been received. Print out the result.
   resp.on('end', () => {
 	  console.log("this is the end");
-          console.log(JSON.parse(datafiona).explanation);
+         
 	  console.log('after the parse');
 	  //console.log('fiona = ' + JSON.stringify(datafiona));
-	  //console.log('my name =' + JSON.parse(datafiona));	
+	  console.log('my name =' + JSON.parse(datafiona).name);
+	  	
+   https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEvent=' + change.value + '&wpID=' + change.id, (resp) => {
+  let datashrek = '';
+
+  // A chunk of data has been recieved.
+  resp.on('datashrek', (chunk) => {
+    datashrek += chunk;
+  });
+
+  // The whole response has been received. Print out the result.
+  resp.on('end', () => {
+    console.log(JSON.parse(datashrek).explanation);
+  });
+
+}).on("error", (err) => {
+  console.log("Error: " + err.message);
+});
+
   });
 
 }).on("error", (err) => {
