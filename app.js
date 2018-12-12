@@ -177,6 +177,7 @@ https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5i
   });
  // The whole response has been received. Print out the result.
   resp.on('end', () => {
+	  console.log("this is the end");
     console.log(JSON.parse(datafiona).explanation);
   });
 
