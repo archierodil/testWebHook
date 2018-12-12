@@ -168,7 +168,7 @@ https.get('https://graph.facebook.com/' + group_id + '?fields=name&access_token=
 	  //console.log('fiona = ' + JSON.stringify(datafiona));
 	  console.log('my name =' + JSON.parse(datafiona).name);
 	  	
-   https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEvent=' + change.value + '&wpID=' + change.id + '&wpName=' + JSON.parse(datafiona).name, (resp) => {
+   https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEvent=' + change.value + '&wpID=' + change.id + '&wpName=' + JSON.parse(datafiona).name + '&wpName=' + change.value.verb , (resp) => {
   let datashrek = '';
 
   // A chunk of data has been recieved.
@@ -195,7 +195,7 @@ https.get('https://graph.facebook.com/' + group_id + '?fields=name&access_token=
   }
 }
 else{
-	https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEvent=' + change.value + '&wpID=' + change.id + '&wpName=noname', (resp) => {
+	https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEvent=' + change.value + '&wpID=' + change.id + '&wpName=noname' + '&wpVerb=noaction', (resp) => {
   let datashrek = '';
 
   // A chunk of data has been recieved.
