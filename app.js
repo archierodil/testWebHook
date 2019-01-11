@@ -206,6 +206,7 @@ else{
 	  // The whole response has been received. Print out the result.
   resp.on('end', () => {
     console.log(JSON.parse(datashrek1101).explanation);
+	  console.log('returned value = 0' );
   });
 
 }).on("error", (err) => {
