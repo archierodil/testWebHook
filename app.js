@@ -140,8 +140,8 @@ function processGroupEvents(data) {
 function processUserEvents(data) {
   data.entry.forEach(function(entry){
     let group_id = entry.id;
-    let eventname = '';	   
-    let attendeename = '';
+    let event_name = '';	   
+    let attendee_name = '';
     entry.changes.forEach(function(change){
 	   
 	console.log('User Change AER 1212-2',JSON.stringify(entry));    
@@ -169,7 +169,7 @@ https.get('https://graph.facebook.com/' + change.value.event_id + '?fields=name&
          
 	//  console.log('after the parse');
 	  console.log('fiona = ' + JSON.stringify(datafiona));
-	  eventname = JSON.parse(datafiona).name;
+	  event_name = JSON.parse(datafiona).name;
 	  //console.log('my name =' + JSON.parse(datafiona).name);
 	  	  	  
 /*	  	
@@ -213,7 +213,7 @@ https.get('https://graph.facebook.com/' + group_id + '?fields=name&access_token=
          
 	  //console.log('after the parse');
 	  //console.log('fiona = ' + JSON.stringify(datafiona));
-	  attendeename = JSON.parse(datafiona).name;	
+	  attendee_name = JSON.parse(datafiona).name;	
 ;
 
 });
@@ -222,8 +222,8 @@ https.get('https://graph.facebook.com/' + group_id + '?fields=name&access_token=
   console.log("Error: " + err.message);
 });	
 
-console.log('eventname = ' + eventname);
-console.log('attendeename = ' + attendeename);	
+console.log('eventname = ' + event_name);
+console.log('attendeename = ' + attendee_name);	
 }
 else{
 console.log('before returned value' );  
