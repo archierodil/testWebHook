@@ -172,7 +172,22 @@ https.get('https://graph.facebook.com/' + change.value.event_id + '?fields=name&
 	  let event_name = JSON.parse(datafiona).name;
 	  console.log('event_name =' + JSON.parse(datafiona).name);
 	  
-	  	  	  
+	  https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEventName=' + event_name  + '&wpID=' + change.value.event_id + '&wpName=' + attendee_name + '&wpVerb=' + change.value.verb , (resp) => {
+  let datashrek = '';
+
+  // A chunk of data has been recieved.
+  resp.on('datashrek', (chunk) => {
+    datashrek += chunk;
+  });
+
+  // The whole response has been received. Print out the result.
+  resp.on('end', () => {
+    console.log(JSON.parse(datashrek).explanation);
+  });
+
+}).on("error", (err) => {
+  console.log("Error: " + err.message);
+})
 /*	  	
    https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEvent=' + change.value + '&wpID=' + change.id + '&wpName=' + JSON.parse(datafiona).name + '&wpVerb=' + change.value.verb , (resp) => {
   let datashrek = '';
@@ -217,22 +232,7 @@ https.get('https://graph.facebook.com/' + group_id + '?fields=name&access_token=
 	  let attendee_name = JSON.parse(datafiona).name;
 	  console.log('attendee_name =' + attendee_name);
 	 
-	    https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEventName=' + event_name  + '&wpID=' + change.value.event_id + '&wpName=' + attendee_name + '&wpVerb=' + change.value.verb , (resp) => {
-  let datashrek = '';
 
-  // A chunk of data has been recieved.
-  resp.on('datashrek', (chunk) => {
-    datashrek += chunk;
-  });
-
-  // The whole response has been received. Print out the result.
-  resp.on('end', () => {
-    console.log(JSON.parse(datashrek).explanation);
-  });
-
-}).on("error", (err) => {
-  console.log("Error: " + err.message);
-})
 ;
 
 });
