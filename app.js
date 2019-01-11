@@ -200,6 +200,8 @@ console.log('before returned value' );
 	https.get('https://script.google.com/macros/s/AKfycbzcDZGjQHpp8VNA3vyFKGAunBvtM3eu5M8D7oEQIVMnYsR7JFAw/exec',(resp) => {
   let datashrek1101 = '';
 
+  console.log('resp = ' + resp.responseUrl);		
+		  
   // A chunk of data has been recieved.
   resp.on('data', (chunk) => {
     datashrek1101 += chunk;
@@ -207,7 +209,8 @@ console.log('before returned value' );
   });
 	  // The whole response has been received. Print out the result.
   resp.on('end', () => {
-	  console.log('on end = ');	 
+	  console.log('on end = ');
+	  
     console.log(datashrek1101);
      
   });
