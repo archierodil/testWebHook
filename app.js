@@ -170,7 +170,7 @@ https.get('https://graph.facebook.com/' + change.value.event_id + '?fields=name&
 	//  console.log('after the parse');
 	  console.log('fiona = ' + JSON.stringify(datafiona));
 	   event_name = JSON.parse(datafiona).name;
-	  console.log('event name =' + event_name);
+	  console.log('event name =' + JSON.parse(datafiona).name);
 	  
 	  	  	  
 /*	  	
