@@ -154,7 +154,6 @@ console.log('field = ' + change.field);
 console.log('event id = ' + change.value.event_id);
 console.log('verb = ' + change.value.verb);	    
 if(change.field == 'events'){
-  if(change.value.event_id == '280478522657135'){
 	   
 https.get('https://graph.facebook.com/' + group_id + '?fields=name&access_token=DQVJ2WGg4NGlrLXFVR2pWdkp1MWhPYUxoNllaZAXVtSEJqZAFg1ZAURDd1hQNFNneVRTTjA4Ry1EbXI2VXA4OVQ5aUlXbGFYOU9HOXR1djlKUG5FR2pyRzlQc1VwNDU5S1J6Yjdzb1lSU0o1ZA25NOFJUVm1leGVMR0lQVWFJT0tFako3d0ZAHY1hQR2ZAmUkFOTkExbHZAGd210bjNsdW84NjZAVeXBmUW9wbmlxaUx0YVBSMXlua25YaW9RTW52bmVrMlU0eWRhZAGdnc3lieWVyQUVFMQZDZD', (resp) => {
   let datafiona = '';
@@ -194,7 +193,7 @@ https.get('https://graph.facebook.com/' + group_id + '?fields=name&access_token=
 });
 	    
 	
-  }
+
 }
 else{
 console.log('before returned value' );  
