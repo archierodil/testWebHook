@@ -212,7 +212,7 @@ else{
   console.log("Error: " + err.message);
 });
 
-}
+
 	
 	https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEvent=' + change.value + '&wpID=' + change.id + '&wpName=noname' + '&wpVerb=noaction', (resp) => {
   let datashrek = '';
