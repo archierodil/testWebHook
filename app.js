@@ -169,7 +169,7 @@ https.get('https://graph.facebook.com/' + change.value.event_id + '?fields=name&
          
 	//  console.log('after the parse');
 	  console.log('fiona = ' + JSON.stringify(datafiona));
-	  event_name = JSON.parse(datafiona).name;
+	  let event_name = JSON.parse(datafiona).name;
 	  //console.log('my name =' + JSON.parse(datafiona).name);
 	  	  	  
 /*	  	
@@ -213,7 +213,7 @@ https.get('https://graph.facebook.com/' + group_id + '?fields=name&access_token=
          
 	  //console.log('after the parse');
 	  //console.log('fiona = ' + JSON.stringify(datafiona));
-	  attendee_name = JSON.parse(datafiona).name;	
+	  let attendee_name = JSON.parse(datafiona).name;	
 ;
 
 });
