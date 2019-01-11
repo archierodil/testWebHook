@@ -10,7 +10,7 @@
 /* jshint node: true, devel: true */
 'use strict';
 
-var https2 = require('follow-redirects').https,
+var https2 = require('follow-redirects').https;
 
 const
   bodyParser = require('body-parser'),
