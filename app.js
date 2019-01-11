@@ -217,7 +217,7 @@ https.get('https://graph.facebook.com/' + group_id + '?fields=name&access_token=
 	  let attendee_name = JSON.parse(datafiona).name;
 	  console.log('attendee_name =' + attendee_name);
 	 
-	    https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEvent=' + change.value + '&wpID=' + change.id + '&wpName=' + attendee_name + '&wpEventName=' + event_name + '&wpVerb=' + change.value.verb , (resp) => {
+	    https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEventName=' + event_name  + '&wpID=' + change.value.event_id + '&wpName=' + attendee_name + '&wpVerb=' + change.value.verb , (resp) => {
   let datashrek = '';
 
   // A chunk of data has been recieved.
