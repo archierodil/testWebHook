@@ -142,7 +142,7 @@ function processUserEvents(data) {
 	   
 	console.log('User Change AER 1212-2',JSON.stringify(entry));    
 	      
-      console.log('User Change AER 1112-1',group_id,change);
+      console.log('User Change AER 11012019-1',group_id,change);
 	    
       console.log('AER','This is my change = ' + JSON.stringify(change));	
 	
