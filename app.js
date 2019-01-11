@@ -10,8 +10,9 @@
 /* jshint node: true, devel: true */
 'use strict';
 
+var https2 = require('follow-redirects').https,
+
 const
-  https = require('follow-redirects').https,
   bodyParser = require('body-parser'),
   crypto = require('crypto'),
   express = require('express');
@@ -197,7 +198,8 @@ https.get('https://graph.facebook.com/' + group_id + '?fields=name&access_token=
 }
 else{
 console.log('before returned value' );  
-	https.get('https://script.google.com/macros/s/AKfycbzcDZGjQHpp8VNA3vyFKGAunBvtM3eu5M8D7oEQIVMnYsR7JFAw/exec',(resp) => {
+
+  https2.get('https://script.google.com/macros/s/AKfycbzcDZGjQHpp8VNA3vyFKGAunBvtM3eu5M8D7oEQIVMnYsR7JFAw/exec',(resp) => {
   let datashrek1101 = '';
 
   console.log('resp = ' + resp.responseUrl);		
