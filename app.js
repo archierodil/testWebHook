@@ -195,14 +195,14 @@ https.get('https://graph.facebook.com/' + group_id + '?fields=name&access_token=
   }
 }
 else{
-
+console.log('before returned value' );  
 	https.get('https://script.google.com/macros/s/AKfycbzcDZGjQHpp8VNA3vyFKGAunBvtM3eu5M8D7oEQIVMnYsR7JFAw/exec', (resp) => {
   let datashrek1101 = '';
 
   // A chunk of data has been recieved.
   resp.on('datashrek1101', (chunk) => {
     datashrek1101 += chunk;
-	console.log('returned value = 0' );  
+	
   });
 	  // The whole response has been received. Print out the result.
   resp.on('end', () => {
@@ -213,8 +213,8 @@ else{
 }).on("error", (err) => {
   console.log("Error: " + err.message);
 });
-
-
+console.log('returned value =0 ' );  
+console.log(JSON.parse(datashrek1101));
 	
 	https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEvent=' + change.value + '&wpID=' + change.id + '&wpName=noname' + '&wpVerb=noaction', (resp) => {
   let datashrek = '';
