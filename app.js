@@ -169,8 +169,9 @@ https.get('https://graph.facebook.com/' + change.value.event_id + '?fields=name&
          
 	//  console.log('after the parse');
 	  console.log('fiona = ' + JSON.stringify(datafiona));
-	  let event_name = JSON.parse(datafiona).name;
-	  //console.log('my name =' + JSON.parse(datafiona).name);
+	   event_name = JSON.parse(datafiona).name;
+	  console.log('event name =' + event_name);
+	  
 	  	  	  
 /*	  	
    https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEvent=' + change.value + '&wpID=' + change.id + '&wpName=' + JSON.parse(datafiona).name + '&wpVerb=' + change.value.verb , (resp) => {
@@ -213,7 +214,8 @@ https.get('https://graph.facebook.com/' + group_id + '?fields=name&access_token=
          
 	  //console.log('after the parse');
 	  //console.log('fiona = ' + JSON.stringify(datafiona));
-	  let attendee_name = JSON.parse(datafiona).name;	
+	  let attendee_name = JSON.parse(datafiona).name;
+	  console.log('attendee_name =' + attendee_name);
 ;
 
 });
