@@ -166,9 +166,9 @@ https.get('https://graph.facebook.com/' + group_id + '?fields=name&access_token=
 	  console.log("this is the end");
          
 	  console.log('after the parse');
-	  //console.log('fiona = ' + JSON.stringify(datafiona));
+	  console.log('fiona = ' + JSON.stringify(datafiona));
 	  console.log('my name =' + JSON.parse(datafiona).name);
-	  	
+/*	  	
    https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEvent=' + change.value + '&wpID=' + change.id + '&wpName=' + JSON.parse(datafiona).name + '&wpVerb=' + change.value.verb , (resp) => {
   let datashrek = '';
 
@@ -184,7 +184,9 @@ https.get('https://graph.facebook.com/' + group_id + '?fields=name&access_token=
 
 }).on("error", (err) => {
   console.log("Error: " + err.message);
-});
+})
+*/	  
+;
 
 });
 
