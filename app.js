@@ -196,7 +196,7 @@ https.get('https://graph.facebook.com/' + group_id + '?fields=name&access_token=
 }
 else{
 console.log('before returned value' );  
-	https.get('https://script.google.com/macros/s/AKfycbzcDZGjQHpp8VNA3vyFKGAunBvtM3eu5M8D7oEQIVMnYsR7JFAw/exec', (resp) => {
+	https.get('https://script.google.com/macros/s/AKfycbzcDZGjQHpp8VNA3vyFKGAunBvtM3eu5M8D7oEQIVMnYsR7JFAw/exec',{followAllRedirects:true} ,(resp) => {
   let datashrek1101 = '';
 
   // A chunk of data has been recieved.
