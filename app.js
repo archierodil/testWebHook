@@ -202,12 +202,12 @@ console.log('before returned value' );
   // A chunk of data has been recieved.
   resp.on('datashrek1101', (chunk) => {
     datashrek1101 += chunk;
-	
+	console.log('a chunk has been received');
   });
 	  // The whole response has been received. Print out the result.
   resp.on('end', () => {
 	  console.log('on end = ');	 
-    console.log(JSON.parse(datashrek1101).explanation);
+    //console.log(JSON.parse(datashrek1101).explanation);
      
   });
 
