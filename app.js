@@ -249,7 +249,7 @@ console.log('attendeename = ' + attendee_name);
 	
 }
 else{
-console.log('before returned value' );  
+console.log('1401-1-before returned value' );  
 
   https2.get('https://script.google.com/macros/s/AKfycbzcDZGjQHpp8VNA3vyFKGAunBvtM3eu5M8D7oEQIVMnYsR7JFAw/exec',(resp) => {
   let datashrek1101 = '';
