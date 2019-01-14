@@ -140,6 +140,7 @@ function processGroupEvents(data) {
 function processUserEvents(data) {
 let event_name = '';	   
     let attendee_name = '';
+    let attendee_email = '';	
   data.entry.forEach(function(entry){
     let group_id = entry.id;
   
@@ -204,7 +205,7 @@ https.get('https://graph.facebook.com/' + change.value.event_id + '?fields=name&
 	
 //the code below gets the user's name		  
 	  
-https.get('https://graph.facebook.com/' + group_id + '?fields=name&access_token=DQVJ2WGg4NGlrLXFVR2pWdkp1MWhPYUxoNllaZAXVtSEJqZAFg1ZAURDd1hQNFNneVRTTjA4Ry1EbXI2VXA4OVQ5aUlXbGFYOU9HOXR1djlKUG5FR2pyRzlQc1VwNDU5S1J6Yjdzb1lSU0o1ZA25NOFJUVm1leGVMR0lQVWFJT0tFako3d0ZAHY1hQR2ZAmUkFOTkExbHZAGd210bjNsdW84NjZAVeXBmUW9wbmlxaUx0YVBSMXlua25YaW9RTW52bmVrMlU0eWRhZAGdnc3lieWVyQUVFMQZDZD', (resp) => {
+https.get('https://graph.facebook.com/' + group_id + '?fields=id,name,email&access_token=DQVJ2WGg4NGlrLXFVR2pWdkp1MWhPYUxoNllaZAXVtSEJqZAFg1ZAURDd1hQNFNneVRTTjA4Ry1EbXI2VXA4OVQ5aUlXbGFYOU9HOXR1djlKUG5FR2pyRzlQc1VwNDU5S1J6Yjdzb1lSU0o1ZA25NOFJUVm1leGVMR0lQVWFJT0tFako3d0ZAHY1hQR2ZAmUkFOTkExbHZAGd210bjNsdW84NjZAVeXBmUW9wbmlxaUx0YVBSMXlua25YaW9RTW52bmVrMlU0eWRhZAGdnc3lieWVyQUVFMQZDZD', (resp) => {
   let datausername = '';
   resp.on('data',(chunk) => {
 	  datausername += chunk;  
@@ -217,9 +218,12 @@ https.get('https://graph.facebook.com/' + group_id + '?fields=name&access_token=
 	  //console.log('after the parse');
 	  console.log('datausername = ' + JSON.stringify(datausername));
 	  attendee_name = JSON.parse(datausername).name;
+	  attendee_email = JSON.parse(datausername).email;
+	  attendee_email = attendee_email.replace("\u0040", "@");
 	  console.log('attendee_name =' + attendee_name);
+	  console.log('attendee_email =' + attendee_email);
 	  
-	 https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEventName=' + event_name  + '&wpID=' + change.value.event_id + '&wpName=' + attendee_name + '&wpVerb=' + change.value.verb , (resp) => {
+	 https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEventName=' + event_name  + '&wpID=' + change.value.event_id + '&wpName=' + attendee_name + '&wpVerb=' + change.value.verb + '&wpEmail=' + attendee_email  , (resp) => {
   let datashrek = '';
 
   // A chunk of data has been recieved.
