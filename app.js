@@ -155,7 +155,8 @@ let event_name = '';
 console.log('field = ' + change.field);
 	    
 console.log('event id = ' + change.value.event_id);
-console.log('verb = ' + change.value.verb);	    
+console.log('verb = ' + change.value.verb);	
+console.log('test 1401 outside events');		    
 if(change.field == 'events'){
 console.log('test 1401 inside events');	
 //the code below gets the event name	   
