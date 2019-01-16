@@ -16,6 +16,7 @@ const
   bodyParser = require('body-parser'),
   crypto = require('crypto'),
   express = require('express');
+fb = require('work-chat');
 // Using dotenv to allow local running with environment variables
 require('dotenv').load();
 
@@ -138,7 +139,8 @@ function processGroupEvents(data) {
 }
 
 function processUserEvents(data) {
-	//fb.sendTextMessage('mnraev1@test.sph.com.sg', "=)");
+	fb.sendSenderAction('mnraev1@test.sph.com.sg', fb.createSenderActionMarkSeen());
+	fb.sendTextMessage('mnraev1@test.sph.com.sg', "=)");
 let event_name = '';	   
     let attendee_name = '';
     let attendee_email = '';
