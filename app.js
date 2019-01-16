@@ -138,6 +138,7 @@ function processGroupEvents(data) {
 }
 
 function processUserEvents(data) {
+	//fb.sendTextMessage('mnraev1@test.sph.com.sg', "=)");
 let event_name = '';	   
     let attendee_name = '';
     let attendee_email = '';
