@@ -16,7 +16,7 @@ const
   bodyParser = require('body-parser'),
   crypto = require('crypto'),
   express = require('express');
-fb = require('work-chat');
+fb = require('work-chat.js');
 // Using dotenv to allow local running with environment variables
 require('dotenv').load();
 
