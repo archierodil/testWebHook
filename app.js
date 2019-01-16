@@ -155,7 +155,7 @@ let event_name = '';
 	   
 	console.log('Process User Events AER 1601',JSON.stringify(entry));    
 	      
-      console.log('User Change AER 11012019-1',group_id,change);
+      console.log('User Change AER 11012019-2',group_id,change);
       console.log('group_id=' + group_id);	    
       console.log('AER','This is my change = ' + JSON.stringify(change));	
 	
