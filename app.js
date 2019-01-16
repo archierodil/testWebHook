@@ -116,13 +116,13 @@ function processPageEvents(data) {
 		// Chat messages sent to the page
     if(entry.messaging) {
       entry.messaging.forEach(function(messaging_event){
-        console.log('Page Messaging Event AER',page_id,messaging_event);
+        console.log('Process Page Events Messaging AER 1601',page_id,messaging_event);
       });
     }
 		// Page related changes, or mentions of the page
     if(entry.changes) {
       entry.changes.forEach(function(change){
-        console.log('Page Change AER',page_id,change);
+        console.log('Process Page Events Changes AER 1601',page_id,change);
       });
     }
   });
@@ -132,7 +132,7 @@ function processGroupEvents(data) {
   data.entry.forEach(function(entry){
     let group_id = entry.id;
     entry.changes.forEach(function(change){
-      console.log('Group Change AER',group_id,change);
+      console.log('Process Group Events AER 1601',group_id,change);
     });
   });
 }
@@ -150,7 +150,7 @@ let event_name = '';
   
     entry.changes.forEach(function(change){
 	   
-	console.log('User Change AER 1212-2',JSON.stringify(entry));    
+	console.log('Process User Events AER 1601',JSON.stringify(entry));    
 	      
       console.log('User Change AER 11012019-1',group_id,change);
       console.log('group_id=' + group_id);	    
@@ -332,7 +332,7 @@ function processWorkplaceSecurityEvents(data) {
   data.entry.forEach(function(entry){
     let group_id = entry.id;
     entry.changes.forEach(function(change){
-      console.log('Workplace Security Change AER',group_id,change);
+      console.log('Workplace Security Change AER 1601',group_id,change);
     });
   });
 }
