@@ -1,6 +1,6 @@
-var config = require("../../config/config.js"),
+var config = require("config.js"),
     request = require("request-promise"), 
-    common = require("./common.js");
+    common = require("common.js");
 
 const graphAPIUrl = "https://graph.facebook.com/v2.6/";
 const graphAPIMessageUrl = graphAPIUrl + "me/messages";
