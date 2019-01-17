@@ -275,11 +275,11 @@ console.log('test 1401 inside events');
 //appscriptcall(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description,user_id,user_verb,attendee_name,attendee_email);
 //console.log('eventname = ' + event_name);
 //console.log('attendeename = ' + attendee_name);	
-return graphcall1(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description)
+return function graphcall1(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description)
 	.then((retvalue) =>{
-	 return graphcall2(https,user_id,attendee_name,attendee_email)
+	 return function graphcall2(https,user_id,attendee_name,attendee_email)
 	.then((retvalue) => {
-		 return appscriptcall(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description,user_id,user_verb,attendee_name,attendee_email);
+		 return function appscriptcall(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description,user_id,user_verb,attendee_name,attendee_email);
 	 })
 
 })
