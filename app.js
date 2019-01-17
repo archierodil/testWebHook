@@ -240,9 +240,11 @@ let event_name = '';
     let event_description = '';	
     let event_id = '';	
     let user_id = '';
-    let user_verb = '';	
+    let user_verb = '';
+    let retvalue = '';	
   data.entry.forEach(function(entry){
     user_id = entry.id;
+	  
   
     entry.changes.forEach(function(change){
 	   
@@ -271,6 +273,14 @@ console.log('passed thru function callgraph2');
 appscriptcall(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description,user_id,user_verb,attendee_name,attendee_email);
 //console.log('eventname = ' + event_name);
 //console.log('attendeename = ' + attendee_name);	
+return graphcall1(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description)
+	.then((retvalue) =>{
+	 return graphcall2(https,user_id,attendee_name,attendee_email)
+	.then((retvalue) => {
+		 return appscriptcall(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description,user_id,user_verb,attendee_name,attendee_email);
+	 })
+
+})
 
 
 
