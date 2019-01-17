@@ -174,6 +174,7 @@ https.get('https://graph.facebook.com/' + event_id + '?fields=name,start_time,en
 }).on("error", (err) => {
   console.log("Error: " + err.message);
 });
+	return 'ok';
 //end of 1st graph call
 }
 function graphcall2(https,user_id,attendee_name,attendee_email){
@@ -205,6 +206,7 @@ https.get('https://graph.facebook.com/' + user_id + '?fields=id,name,email&acces
 }).on("error", (err) => {
   console.log("Error: " + err.message);
 });	
+return 'ok';	
 //end of 2nd graph call	
 }
 function appscriptcall(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description,user_id,user_verb,attendee_name,attendee_email){
@@ -226,6 +228,7 @@ function appscriptcall(https,event_id,event_name,start_datetime,end_datetime,eve
   console.log("Error: " + err.message);
 })
 //end of appscript call
+	return 'ok';
 }
 
 function processUserEvents(data) {
