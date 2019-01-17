@@ -148,28 +148,31 @@ let event_name = '';
     let end_datetime = '';	
     let event_location = '';
     let event_description = '';	
+    let event_id = '';	
+    let user_id = '';	
   data.entry.forEach(function(entry){
-    let group_id = entry.id;
+    user_id = entry.id;
   
     entry.changes.forEach(function(change){
 	   
 	console.log('Process User Events AER 1601-2',JSON.stringify(entry));    
 	      
-      console.log('User Change AER 11012019-2',group_id,change);
-      console.log('group_id=' + group_id);	    
+      console.log('User Change AER 11012019-2',user_id,change);
+      console.log('group_id=' + user_id);	    
       console.log('AER','This is my change = ' + JSON.stringify(change));	
 	
 	    const https = require('https');
 console.log('field = ' + change.field);
 	    
 console.log('event id = ' + change.value.event_id);
+	   event_id = change.value.event_id
 console.log('verb = ' + change.value.verb);	
 console.log('test 1401 outside events');		    
 if(change.field == 'events'){
 console.log('test 1401 inside events');	
  //start of 1st graph call	
 //the code below gets the event name	   
-https.get('https://graph.facebook.com/' + change.value.event_id + '?fields=name,start_time,end_time,place,description&access_token=DQVJ2WGg4NGlrLXFVR2pWdkp1MWhPYUxoNllaZAXVtSEJqZAFg1ZAURDd1hQNFNneVRTTjA4Ry1EbXI2VXA4OVQ5aUlXbGFYOU9HOXR1djlKUG5FR2pyRzlQc1VwNDU5S1J6Yjdzb1lSU0o1ZA25NOFJUVm1leGVMR0lQVWFJT0tFako3d0ZAHY1hQR2ZAmUkFOTkExbHZAGd210bjNsdW84NjZAVeXBmUW9wbmlxaUx0YVBSMXlua25YaW9RTW52bmVrMlU0eWRhZAGdnc3lieWVyQUVFMQZDZD', (resp) => {
+https.get('https://graph.facebook.com/' + event_id + '?fields=name,start_time,end_time,place,description&access_token=DQVJ2WGg4NGlrLXFVR2pWdkp1MWhPYUxoNllaZAXVtSEJqZAFg1ZAURDd1hQNFNneVRTTjA4Ry1EbXI2VXA4OVQ5aUlXbGFYOU9HOXR1djlKUG5FR2pyRzlQc1VwNDU5S1J6Yjdzb1lSU0o1ZA25NOFJUVm1leGVMR0lQVWFJT0tFako3d0ZAHY1hQR2ZAmUkFOTkExbHZAGd210bjNsdW84NjZAVeXBmUW9wbmlxaUx0YVBSMXlua25YaW9RTW52bmVrMlU0eWRhZAGdnc3lieWVyQUVFMQZDZD', (resp) => {
   let dataevent = '';
   resp.on('data',(chunk) => {
 	  dataevent += chunk;  
@@ -193,7 +196,7 @@ https.get('https://graph.facebook.com/' + change.value.event_id + '?fields=name,
   //start of 2nd graph call
   //the code below gets the user's name		  
 	  
-https.get('https://graph.facebook.com/' + group_id + '?fields=id,name,email&access_token=DQVJ2WGg4NGlrLXFVR2pWdkp1MWhPYUxoNllaZAXVtSEJqZAFg1ZAURDd1hQNFNneVRTTjA4Ry1EbXI2VXA4OVQ5aUlXbGFYOU9HOXR1djlKUG5FR2pyRzlQc1VwNDU5S1J6Yjdzb1lSU0o1ZA25NOFJUVm1leGVMR0lQVWFJT0tFako3d0ZAHY1hQR2ZAmUkFOTkExbHZAGd210bjNsdW84NjZAVeXBmUW9wbmlxaUx0YVBSMXlua25YaW9RTW52bmVrMlU0eWRhZAGdnc3lieWVyQUVFMQZDZD', (resp) => {
+https.get('https://graph.facebook.com/' + user_id + '?fields=id,name,email&access_token=DQVJ2WGg4NGlrLXFVR2pWdkp1MWhPYUxoNllaZAXVtSEJqZAFg1ZAURDd1hQNFNneVRTTjA4Ry1EbXI2VXA4OVQ5aUlXbGFYOU9HOXR1djlKUG5FR2pyRzlQc1VwNDU5S1J6Yjdzb1lSU0o1ZA25NOFJUVm1leGVMR0lQVWFJT0tFako3d0ZAHY1hQR2ZAmUkFOTkExbHZAGd210bjNsdW84NjZAVeXBmUW9wbmlxaUx0YVBSMXlua25YaW9RTW52bmVrMlU0eWRhZAGdnc3lieWVyQUVFMQZDZD', (resp) => {
   let datausername = '';
   resp.on('data',(chunk) => {
 	  datausername += chunk;  
@@ -229,8 +232,8 @@ https.get('https://graph.facebook.com/' + group_id + '?fields=id,name,email&acce
 //end of 1st graph call
 	
 
-console.log('eventname = ' + event_name);
-console.log('attendeename = ' + attendee_name);	
+//console.log('eventname = ' + event_name);
+//console.log('attendeename = ' + attendee_name);	
 
 //start of appscript call	  
 	 https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEventName=' + event_name  + '&wpID=' + change.value.event_id + '&wpName=' + attendee_name + '&wpVerb=' + change.value.verb + '&wpEmail=' + attendee_email + '&wpStart=' + start_datetime + '&wpEnd=' + end_datetime + '&wpLocation=' + event_location + '&wpDescription=' + event_description , (resp) => {
