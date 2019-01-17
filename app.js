@@ -250,7 +250,7 @@ console.log('attendeename = ' + attendee_name);
   console.log("Error: " + err.message);
 })
 //end of appscript call
-*/
+
 	
 }
 else{
