@@ -176,7 +176,37 @@ https.get('https://graph.facebook.com/' + event_id + '?fields=name,start_time,en
 });
 //end of 1st graph call
 }
+function graphcall2(https,user_id,attendee_name,attendee_email){
+//start of 2nd graph call
+  //the code below gets the user's name		  
+	  
+https.get('https://graph.facebook.com/' + user_id + '?fields=id,name,email&access_token=DQVJ2WGg4NGlrLXFVR2pWdkp1MWhPYUxoNllaZAXVtSEJqZAFg1ZAURDd1hQNFNneVRTTjA4Ry1EbXI2VXA4OVQ5aUlXbGFYOU9HOXR1djlKUG5FR2pyRzlQc1VwNDU5S1J6Yjdzb1lSU0o1ZA25NOFJUVm1leGVMR0lQVWFJT0tFako3d0ZAHY1hQR2ZAmUkFOTkExbHZAGd210bjNsdW84NjZAVeXBmUW9wbmlxaUx0YVBSMXlua25YaW9RTW52bmVrMlU0eWRhZAGdnc3lieWVyQUVFMQZDZD', (resp) => {
+  let datausername = '';
+  resp.on('data',(chunk) => {
+	  datausername += chunk;  
+  });
+	
+ // The whole response has been received. Print out the result.
+  resp.on('end', () => {
+	  //console.log("this is the end");
 
+	  //console.log('after the parse');
+	  console.log('datausername = ' + JSON.stringify(datausername));
+	  attendee_name = JSON.parse(datausername).name;
+	  attendee_email = JSON.parse(datausername).email;
+	  attendee_email = attendee_email.replace("\u0040", "@");
+	  console.log('attendee_name =' + attendee_name);
+	  console.log('attendee_email =' + attendee_email);
+
+;
+
+});
+
+}).on("error", (err) => {
+  console.log("Error: " + err.message);
+});	
+//end of 2nd graph call	
+}
 
 function processUserEvents(data) {
 	//fb.sendSenderAction('mnraev1@test.sph.com.sg', fb.createSenderActionMarkSeen());
@@ -213,35 +243,8 @@ console.log('test 1401 inside events');
 console.log('passed thru function callgraph1');	
 //return 
 	graphcall1(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description);
-//start of 2nd graph call
-  //the code below gets the user's name		  
-	  
-https.get('https://graph.facebook.com/' + user_id + '?fields=id,name,email&access_token=DQVJ2WGg4NGlrLXFVR2pWdkp1MWhPYUxoNllaZAXVtSEJqZAFg1ZAURDd1hQNFNneVRTTjA4Ry1EbXI2VXA4OVQ5aUlXbGFYOU9HOXR1djlKUG5FR2pyRzlQc1VwNDU5S1J6Yjdzb1lSU0o1ZA25NOFJUVm1leGVMR0lQVWFJT0tFako3d0ZAHY1hQR2ZAmUkFOTkExbHZAGd210bjNsdW84NjZAVeXBmUW9wbmlxaUx0YVBSMXlua25YaW9RTW52bmVrMlU0eWRhZAGdnc3lieWVyQUVFMQZDZD', (resp) => {
-  let datausername = '';
-  resp.on('data',(chunk) => {
-	  datausername += chunk;  
-  });
-	
- // The whole response has been received. Print out the result.
-  resp.on('end', () => {
-	  //console.log("this is the end");
-
-	  //console.log('after the parse');
-	  console.log('datausername = ' + JSON.stringify(datausername));
-	  attendee_name = JSON.parse(datausername).name;
-	  attendee_email = JSON.parse(datausername).email;
-	  attendee_email = attendee_email.replace("\u0040", "@");
-	  console.log('attendee_name =' + attendee_name);
-	  console.log('attendee_email =' + attendee_email);
-
-;
-
-});
-
-}).on("error", (err) => {
-  console.log("Error: " + err.message);
-});	
-//end of 2nd graph call	
+console.log('passed thru function callgraph2');	
+	graphcall2(https,user_id,attendee_name,attendee_email);
 
 //console.log('eventname = ' + event_name);
 //console.log('attendeename = ' + attendee_name);	
