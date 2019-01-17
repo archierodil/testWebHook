@@ -24,6 +24,7 @@ var app = express();
 app.set('port', process.env.PORT || 5000);
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 
+
 /*
  * Be sure to setup your config values before running this code. You can
  * set them using environment variables.
@@ -38,6 +39,8 @@ const
   APP_SECRET = process.env.APP_SECRET,
   VERIFY_TOKEN = process.env.VERIFY_TOKEN,
   ACCESS_TOKEN = process.env.ACCESS_TOKEN;
+
+
 
 if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN)) {
   console.error('Missing config values');
@@ -81,6 +84,7 @@ app.get('/', function(req, res) {
  *
  */
 app.post('/', function (req, res) {
+	
   try{
     var data = req.body;
     // On Workplace, webhooks can be sent for page, group, user and
@@ -138,11 +142,47 @@ function processGroupEvents(data) {
   });
 }
 
+function graphcall1(event_id,event_name,start_datetime,end_datetime,event_location,event_description){
+	 //start of 1st graph call	
+//the code below gets the event name	   
+https.get('https://graph.facebook.com/' + event_id + '?fields=name,start_time,end_time,place,description&access_token=DQVJ2WGg4NGlrLXFVR2pWdkp1MWhPYUxoNllaZAXVtSEJqZAFg1ZAURDd1hQNFNneVRTTjA4Ry1EbXI2VXA4OVQ5aUlXbGFYOU9HOXR1djlKUG5FR2pyRzlQc1VwNDU5S1J6Yjdzb1lSU0o1ZA25NOFJUVm1leGVMR0lQVWFJT0tFako3d0ZAHY1hQR2ZAmUkFOTkExbHZAGd210bjNsdW84NjZAVeXBmUW9wbmlxaUx0YVBSMXlua25YaW9RTW52bmVrMlU0eWRhZAGdnc3lieWVyQUVFMQZDZD', (resp) => {
+  let dataevent = '';
+  resp.on('data',(chunk) => {
+	  dataevent += chunk;  
+  });
+	
+ // The whole response has been received. Print out the result.
+  resp.on('end', () => {
+	  //console.log("this is the end");
+         
+	//  console.log('after the parse');
+	  console.log('dataevent = ' + JSON.stringify(dataevent));
+	  event_name = JSON.parse(dataevent).name;
+	  console.log('event_name =' + JSON.parse(dataevent).name);
+	  start_datetime = JSON.parse(dataevent).start_time;
+          end_datetime = JSON.parse(dataevent).end_time;
+	  event_location = JSON.parse(dataevent).place.name;
+	  console.log('event location = ' + event_location);
+	  event_description = JSON.parse(dataevent).description;	
+	   console.log('event description = ' + event_description);
+	  
+ 
+;
+
+});
+
+}).on("error", (err) => {
+  console.log("Error: " + err.message);
+});
+//end of 1st graph call
+}
+}
+
 function processUserEvents(data) {
 	//fb.sendSenderAction('mnraev1@test.sph.com.sg', fb.createSenderActionMarkSeen());
 	//fb.sendTextMessage('mnraev1@test.sph.com.sg', "=)");
 let event_name = '';	   
-    let attendee_name = '';
+   let attendee_name = '';
     let attendee_email = '';
     let start_datetime = '';
     let end_datetime = '';	
@@ -170,30 +210,9 @@ console.log('verb = ' + change.value.verb);
 console.log('test 1401 outside events');		    
 if(change.field == 'events'){
 console.log('test 1401 inside events');	
- //start of 1st graph call	
-//the code below gets the event name	   
-https.get('https://graph.facebook.com/' + event_id + '?fields=name,start_time,end_time,place,description&access_token=DQVJ2WGg4NGlrLXFVR2pWdkp1MWhPYUxoNllaZAXVtSEJqZAFg1ZAURDd1hQNFNneVRTTjA4Ry1EbXI2VXA4OVQ5aUlXbGFYOU9HOXR1djlKUG5FR2pyRzlQc1VwNDU5S1J6Yjdzb1lSU0o1ZA25NOFJUVm1leGVMR0lQVWFJT0tFako3d0ZAHY1hQR2ZAmUkFOTkExbHZAGd210bjNsdW84NjZAVeXBmUW9wbmlxaUx0YVBSMXlua25YaW9RTW52bmVrMlU0eWRhZAGdnc3lieWVyQUVFMQZDZD', (resp) => {
-  let dataevent = '';
-  resp.on('data',(chunk) => {
-	  dataevent += chunk;  
-  });
-	
- // The whole response has been received. Print out the result.
-  resp.on('end', () => {
-	  //console.log("this is the end");
-         
-	//  console.log('after the parse');
-	  console.log('dataevent = ' + JSON.stringify(dataevent));
-	  event_name = JSON.parse(dataevent).name;
-	  console.log('event_name =' + JSON.parse(dataevent).name);
-	  start_datetime = JSON.parse(dataevent).start_time;
-          end_datetime = JSON.parse(dataevent).end_time;
-	  event_location = JSON.parse(dataevent).place.name;
-	  console.log('event location = ' + event_location);
-	  event_description = JSON.parse(dataevent).description;	
-	   console.log('event description = ' + event_description);
-	  
-  //start of 2nd graph call
+console.log('passed thru function callgraph1');	
+return graphcall1(event_id,event_name,start_datetime,end_datetime,event_location,event_description);
+//start of 2nd graph call
   //the code below gets the user's name		  
 	  
 https.get('https://graph.facebook.com/' + user_id + '?fields=id,name,email&access_token=DQVJ2WGg4NGlrLXFVR2pWdkp1MWhPYUxoNllaZAXVtSEJqZAFg1ZAURDd1hQNFNneVRTTjA4Ry1EbXI2VXA4OVQ5aUlXbGFYOU9HOXR1djlKUG5FR2pyRzlQc1VwNDU5S1J6Yjdzb1lSU0o1ZA25NOFJUVm1leGVMR0lQVWFJT0tFako3d0ZAHY1hQR2ZAmUkFOTkExbHZAGd210bjNsdW84NjZAVeXBmUW9wbmlxaUx0YVBSMXlua25YaW9RTW52bmVrMlU0eWRhZAGdnc3lieWVyQUVFMQZDZD', (resp) => {
@@ -221,16 +240,7 @@ https.get('https://graph.facebook.com/' + user_id + '?fields=id,name,email&acces
 }).on("error", (err) => {
   console.log("Error: " + err.message);
 });	
-//end of 2nd graph call
-;
-
-});
-
-}).on("error", (err) => {
-  console.log("Error: " + err.message);
-});
-//end of 1st graph call
-	
+//end of 2nd graph call	
 
 //console.log('eventname = ' + event_name);
 //console.log('attendeename = ' + attendee_name);	
