@@ -267,13 +267,12 @@ console.log('verb = ' + change.value.verb);
 console.log('test 1401 outside events');		    
 if(change.field == 'events'){
 console.log('test 1401 inside events');	
-console.log('passed thru function callgraph1');	
-//return 
-	graphcall1(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description);
-console.log('passed thru function callgraph2');	
-	graphcall2(https,user_id,attendee_name,attendee_email);
-	console.log('passed thru function appscriptcall');	
-appscriptcall(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description,user_id,user_verb,attendee_name,attendee_email);
+//console.log('passed thru function callgraph1');	
+//	graphcall1(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description);
+//console.log('passed thru function callgraph2');	
+//	graphcall2(https,user_id,attendee_name,attendee_email);
+//	console.log('passed thru function appscriptcall');	
+//appscriptcall(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description,user_id,user_verb,attendee_name,attendee_email);
 //console.log('eventname = ' + event_name);
 //console.log('attendeename = ' + attendee_name);	
 return graphcall1(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description)
