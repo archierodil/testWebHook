@@ -24,6 +24,7 @@ var app = express();
 app.set('port', process.env.PORT || 5000);
 app.use(bodyParser.json({ verify: verifyRequestSignature }));
 
+
 /*
  * Be sure to setup your config values before running this code. You can
  * set them using environment variables.
@@ -38,6 +39,8 @@ const
   APP_SECRET = process.env.APP_SECRET,
   VERIFY_TOKEN = process.env.VERIFY_TOKEN,
   ACCESS_TOKEN = process.env.ACCESS_TOKEN;
+
+
 
 if (!(APP_SECRET && VERIFY_TOKEN && ACCESS_TOKEN)) {
   console.error('Missing config values');
@@ -81,6 +84,7 @@ app.get('/', function(req, res) {
  *
  */
 app.post('/', function (req, res) {
+	
   try{
     var data = req.body;
     // On Workplace, webhooks can be sent for page, group, user and
@@ -138,37 +142,10 @@ function processGroupEvents(data) {
   });
 }
 
-function processUserEvents(data) {
-	//fb.sendSenderAction('mnraev1@test.sph.com.sg', fb.createSenderActionMarkSeen());
-	//fb.sendTextMessage('mnraev1@test.sph.com.sg', "=)");
-let event_name = '';	   
-    let attendee_name = '';
-    let attendee_email = '';
-    let start_datetime = '';
-    let end_datetime = '';	
-    let event_location = '';
-    let event_description = '';	
-  data.entry.forEach(function(entry){
-    let group_id = entry.id;
-  
-    entry.changes.forEach(function(change){
-	   
-	console.log('Process User Events AER 1601-2',JSON.stringify(entry));    
-	      
-      console.log('User Change AER 11012019-2',group_id,change);
-      console.log('group_id=' + group_id);	    
-      console.log('AER','This is my change = ' + JSON.stringify(change));	
-	
-	    const https = require('https');
-console.log('field = ' + change.field);
-	    
-console.log('event id = ' + change.value.event_id);
-console.log('verb = ' + change.value.verb);	
-console.log('test 1401 outside events');		    
-if(change.field == 'events'){
-console.log('test 1401 inside events');	
+function graphcall1(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description){
+	 //start of 1st graph call	
 //the code below gets the event name	   
-https.get('https://graph.facebook.com/' + change.value.event_id + '?fields=name,start_time,end_time,place,description&access_token=DQVJ2WGg4NGlrLXFVR2pWdkp1MWhPYUxoNllaZAXVtSEJqZAFg1ZAURDd1hQNFNneVRTTjA4Ry1EbXI2VXA4OVQ5aUlXbGFYOU9HOXR1djlKUG5FR2pyRzlQc1VwNDU5S1J6Yjdzb1lSU0o1ZA25NOFJUVm1leGVMR0lQVWFJT0tFako3d0ZAHY1hQR2ZAmUkFOTkExbHZAGd210bjNsdW84NjZAVeXBmUW9wbmlxaUx0YVBSMXlua25YaW9RTW52bmVrMlU0eWRhZAGdnc3lieWVyQUVFMQZDZD', (resp) => {
+https.get('https://graph.facebook.com/' + event_id + '?fields=name,start_time,end_time,place,description&access_token=DQVJ2WGg4NGlrLXFVR2pWdkp1MWhPYUxoNllaZAXVtSEJqZAFg1ZAURDd1hQNFNneVRTTjA4Ry1EbXI2VXA4OVQ5aUlXbGFYOU9HOXR1djlKUG5FR2pyRzlQc1VwNDU5S1J6Yjdzb1lSU0o1ZA25NOFJUVm1leGVMR0lQVWFJT0tFako3d0ZAHY1hQR2ZAmUkFOTkExbHZAGd210bjNsdW84NjZAVeXBmUW9wbmlxaUx0YVBSMXlua25YaW9RTW52bmVrMlU0eWRhZAGdnc3lieWVyQUVFMQZDZD', (resp) => {
   let dataevent = '';
   resp.on('data',(chunk) => {
 	  dataevent += chunk;  
@@ -188,24 +165,8 @@ https.get('https://graph.facebook.com/' + change.value.event_id + '?fields=name,
 	  console.log('event location = ' + event_location);
 	  event_description = JSON.parse(dataevent).description;	
 	   console.log('event description = ' + event_description);
-/*	  	
-   https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEvent=' + change.value + '&wpID=' + change.id + '&wpName=' + JSON.parse(datafiona).name + '&wpVerb=' + change.value.verb , (resp) => {
-  let datashrek = '';
-
-  // A chunk of data has been recieved.
-  resp.on('datashrek', (chunk) => {
-    datashrek += chunk;
-  });
-
-  // The whole response has been received. Print out the result.
-  resp.on('end', () => {
-    console.log(JSON.parse(datashrek).explanation);
-  });
-
-}).on("error", (err) => {
-  console.log("Error: " + err.message);
-})
-*/	  
+	  
+ 
 ;
 
 });
@@ -213,11 +174,14 @@ https.get('https://graph.facebook.com/' + change.value.event_id + '?fields=name,
 }).on("error", (err) => {
   console.log("Error: " + err.message);
 });
-
-	
-//the code below gets the user's name		  
+	return 'ok';
+//end of 1st graph call
+}
+function graphcall2(https,user_id,attendee_name,attendee_email){
+//start of 2nd graph call
+  //the code below gets the user's name		  
 	  
-https.get('https://graph.facebook.com/' + group_id + '?fields=id,name,email&access_token=DQVJ2WGg4NGlrLXFVR2pWdkp1MWhPYUxoNllaZAXVtSEJqZAFg1ZAURDd1hQNFNneVRTTjA4Ry1EbXI2VXA4OVQ5aUlXbGFYOU9HOXR1djlKUG5FR2pyRzlQc1VwNDU5S1J6Yjdzb1lSU0o1ZA25NOFJUVm1leGVMR0lQVWFJT0tFako3d0ZAHY1hQR2ZAmUkFOTkExbHZAGd210bjNsdW84NjZAVeXBmUW9wbmlxaUx0YVBSMXlua25YaW9RTW52bmVrMlU0eWRhZAGdnc3lieWVyQUVFMQZDZD', (resp) => {
+https.get('https://graph.facebook.com/' + user_id + '?fields=id,name,email&access_token=DQVJ2WGg4NGlrLXFVR2pWdkp1MWhPYUxoNllaZAXVtSEJqZAFg1ZAURDd1hQNFNneVRTTjA4Ry1EbXI2VXA4OVQ5aUlXbGFYOU9HOXR1djlKUG5FR2pyRzlQc1VwNDU5S1J6Yjdzb1lSU0o1ZA25NOFJUVm1leGVMR0lQVWFJT0tFako3d0ZAHY1hQR2ZAmUkFOTkExbHZAGd210bjNsdW84NjZAVeXBmUW9wbmlxaUx0YVBSMXlua25YaW9RTW52bmVrMlU0eWRhZAGdnc3lieWVyQUVFMQZDZD', (resp) => {
   let datausername = '';
   resp.on('data',(chunk) => {
 	  datausername += chunk;  
@@ -234,8 +198,20 @@ https.get('https://graph.facebook.com/' + group_id + '?fields=id,name,email&acce
 	  attendee_email = attendee_email.replace("\u0040", "@");
 	  console.log('attendee_name =' + attendee_name);
 	  console.log('attendee_email =' + attendee_email);
-	  
-	 https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEventName=' + event_name  + '&wpID=' + change.value.event_id + '&wpName=' + attendee_name + '&wpVerb=' + change.value.verb + '&wpEmail=' + attendee_email + '&wpStart=' + start_datetime + '&wpEnd=' + end_datetime + '&wpLocation=' + event_location + '&wpDescription=' + event_description , (resp) => {
+
+;
+
+});
+
+}).on("error", (err) => {
+  console.log("Error: " + err.message);
+});	
+return 'ok';	
+//end of 2nd graph call	
+}
+function appscriptcall(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description,user_id,user_verb,attendee_name,attendee_email){
+//start of appscript call	  
+	 https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEventName=' + event_name  + '&wpID=' + event_id + '&wpName=' + attendee_name + '&wpVerb=' + user_verb + '&wpEmail=' + attendee_email + '&wpStart=' + start_datetime + '&wpEnd=' + end_datetime + '&wpLocation=' + event_location + '&wpDescription=' + event_description , (resp) => {
   let datashrek = '';
 
   // A chunk of data has been recieved.
@@ -250,19 +226,67 @@ https.get('https://graph.facebook.com/' + group_id + '?fields=id,name,email&acce
 
 }).on("error", (err) => {
   console.log("Error: " + err.message);
-}) 
+})
+//end of appscript call
+	return 'ok';
+}
 
-;
-
-});
-
-}).on("error", (err) => {
-  console.log("Error: " + err.message);
-});	
-
-console.log('eventname = ' + event_name);
-console.log('attendeename = ' + attendee_name);	
+function processUserEvents(data) {
+	//fb.sendSenderAction('mnraev1@test.sph.com.sg', fb.createSenderActionMarkSeen());
+	//fb.sendTextMessage('mnraev1@test.sph.com.sg', "=)");
+let event_name = '';	   
+   let attendee_name = '';
+    let attendee_email = '';
+    let start_datetime = '';
+    let end_datetime = '';	
+    let event_location = '';
+    let event_description = '';	
+    let event_id = '';	
+    let user_id = '';
+    let user_verb = '';
+    let retvalue = '';	
+  data.entry.forEach(function(entry){
+    user_id = entry.id;
+	  
+  
+    entry.changes.forEach(function(change){
+	   
+	console.log('Process User Events AER 1601-2',JSON.stringify(entry));    
+	      
+      console.log('User Change AER 11012019-2',user_id,change);
+      console.log('group_id=' + user_id);	    
+      console.log('AER','This is my change = ' + JSON.stringify(change));	
 	
+	    const https = require('https');
+console.log('field = ' + change.field);
+	    
+console.log('event id = ' + change.value.event_id);
+	   event_id = change.value.event_id
+console.log('verb = ' + change.value.verb);
+	    user_verb = change.value.verb;
+console.log('test 1401 outside events');		    
+if(change.field == 'events'){
+console.log('test 1401 inside events');	
+console.log('passed thru function callgraph1');	
+//return 
+	graphcall1(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description);
+console.log('passed thru function callgraph2');	
+	graphcall2(https,user_id,attendee_name,attendee_email);
+	console.log('passed thru function appscriptcall');	
+appscriptcall(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description,user_id,user_verb,attendee_name,attendee_email);
+//console.log('eventname = ' + event_name);
+//console.log('attendeename = ' + attendee_name);	
+return graphcall1(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description)
+	.then((retvalue) =>{
+	 return graphcall2(https,user_id,attendee_name,attendee_email)
+	.then((retvalue) => {
+		 return appscriptcall(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description,user_id,user_verb,attendee_name,attendee_email);
+	 })
+
+})
+
+
+
 	
 }
 else{
