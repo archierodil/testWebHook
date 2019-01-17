@@ -207,9 +207,9 @@ https.get('https://graph.facebook.com/' + user_id + '?fields=id,name,email&acces
 });	
 //end of 2nd graph call	
 }
-function appscriptcall(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description,user_id,attendee_name,attendee_email){
+function appscriptcall(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description,user_id,user_verb,attendee_name,attendee_email){
 //start of appscript call	  
-	 https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEventName=' + event_name  + '&wpID=' + change.value.event_id + '&wpName=' + attendee_name + '&wpVerb=' + change.value.verb + '&wpEmail=' + attendee_email + '&wpStart=' + start_datetime + '&wpEnd=' + end_datetime + '&wpLocation=' + event_location + '&wpDescription=' + event_description , (resp) => {
+	 https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEventName=' + event_name  + '&wpID=' + event_id + '&wpName=' + attendee_name + '&wpVerb=' + user_verb + '&wpEmail=' + attendee_email + '&wpStart=' + start_datetime + '&wpEnd=' + end_datetime + '&wpLocation=' + event_location + '&wpDescription=' + event_description , (resp) => {
   let datashrek = '';
 
   // A chunk of data has been recieved.
@@ -239,7 +239,8 @@ let event_name = '';
     let event_location = '';
     let event_description = '';	
     let event_id = '';	
-    let user_id = '';	
+    let user_id = '';
+    let user_verb = '';	
   data.entry.forEach(function(entry){
     user_id = entry.id;
   
@@ -256,7 +257,8 @@ console.log('field = ' + change.field);
 	    
 console.log('event id = ' + change.value.event_id);
 	   event_id = change.value.event_id
-console.log('verb = ' + change.value.verb);	
+console.log('verb = ' + change.value.verb);
+	    user_action = change.value.verb;
 console.log('test 1401 outside events');		    
 if(change.field == 'events'){
 console.log('test 1401 inside events');	
@@ -266,7 +268,7 @@ console.log('passed thru function callgraph1');
 console.log('passed thru function callgraph2');	
 	graphcall2(https,user_id,attendee_name,attendee_email);
 	console.log('passed thru function appscriptcall');	
-appscriptcall(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description,user_id,attendee_name,attendee_email);
+appscriptcallappscriptcall(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description,user_id,user_verb,attendee_name,attendee_email);
 //console.log('eventname = ' + event_name);
 //console.log('attendeename = ' + attendee_name);	
 
