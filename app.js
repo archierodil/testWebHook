@@ -268,7 +268,7 @@ console.log('passed thru function callgraph1');
 console.log('passed thru function callgraph2');	
 	graphcall2(https,user_id,attendee_name,attendee_email);
 	console.log('passed thru function appscriptcall');	
-appscriptcallappscriptcall(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description,user_id,user_verb,attendee_name,attendee_email);
+appscriptcall(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description,user_id,user_verb,attendee_name,attendee_email);
 //console.log('eventname = ' + event_name);
 //console.log('attendeename = ' + attendee_name);	
 
