@@ -176,7 +176,7 @@ https.get('https://graph.facebook.com/' + event_id + '?fields=name,start_time,en
 });
 //end of 1st graph call
 }
-}
+
 
 function processUserEvents(data) {
 	//fb.sendSenderAction('mnraev1@test.sph.com.sg', fb.createSenderActionMarkSeen());
@@ -211,7 +211,8 @@ console.log('test 1401 outside events');
 if(change.field == 'events'){
 console.log('test 1401 inside events');	
 console.log('passed thru function callgraph1');	
-return graphcall1(event_id,event_name,start_datetime,end_datetime,event_location,event_description);
+//return 
+	graphcall1(event_id,event_name,start_datetime,end_datetime,event_location,event_description);
 //start of 2nd graph call
   //the code below gets the user's name		  
 	  
