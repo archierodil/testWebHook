@@ -207,6 +207,26 @@ https.get('https://graph.facebook.com/' + user_id + '?fields=id,name,email&acces
 });	
 //end of 2nd graph call	
 }
+function appscriptcall(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description,user_id,attendee_name,attendee_email){
+//start of appscript call	  
+	 https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEventName=' + event_name  + '&wpID=' + change.value.event_id + '&wpName=' + attendee_name + '&wpVerb=' + change.value.verb + '&wpEmail=' + attendee_email + '&wpStart=' + start_datetime + '&wpEnd=' + end_datetime + '&wpLocation=' + event_location + '&wpDescription=' + event_description , (resp) => {
+  let datashrek = '';
+
+  // A chunk of data has been recieved.
+  resp.on('datashrek', (chunk) => {
+    datashrek += chunk;
+  });
+
+  // The whole response has been received. Print out the result.
+  resp.on('end', () => {
+    console.log(JSON.parse(datashrek).explanation);
+  });
+
+}).on("error", (err) => {
+  console.log("Error: " + err.message);
+})
+//end of appscript call
+}
 
 function processUserEvents(data) {
 	//fb.sendSenderAction('mnraev1@test.sph.com.sg', fb.createSenderActionMarkSeen());
@@ -245,28 +265,12 @@ console.log('passed thru function callgraph1');
 	graphcall1(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description);
 console.log('passed thru function callgraph2');	
 	graphcall2(https,user_id,attendee_name,attendee_email);
-
+	console.log('passed thru function appscriptcall');	
+appscriptcall(https,event_id,event_name,start_datetime,end_datetime,event_location,event_description,user_id,attendee_name,attendee_email);
 //console.log('eventname = ' + event_name);
 //console.log('attendeename = ' + attendee_name);	
 
-//start of appscript call	  
-	 https.get('https://script.google.com/macros/s/AKfycbx5m7fyjxlQfjoJXGPTT649xugH5iWpfShSuubluVBnjUkArSM/exec?wpEventName=' + event_name  + '&wpID=' + change.value.event_id + '&wpName=' + attendee_name + '&wpVerb=' + change.value.verb + '&wpEmail=' + attendee_email + '&wpStart=' + start_datetime + '&wpEnd=' + end_datetime + '&wpLocation=' + event_location + '&wpDescription=' + event_description , (resp) => {
-  let datashrek = '';
 
-  // A chunk of data has been recieved.
-  resp.on('datashrek', (chunk) => {
-    datashrek += chunk;
-  });
-
-  // The whole response has been received. Print out the result.
-  resp.on('end', () => {
-    console.log(JSON.parse(datashrek).explanation);
-  });
-
-}).on("error", (err) => {
-  console.log("Error: " + err.message);
-})
-//end of appscript call
 
 	
 }
